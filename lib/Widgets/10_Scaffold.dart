@@ -67,14 +67,59 @@ class ScaffoldWidget extends StatelessWidget {
         // =========================================================
 
         // 5-drawer section
+
         drawer: Drawer(
-            // backgroundColor: Colors.red,
-            child: ListView(
-              children: [
-                
-              ],
-            ),
-            ),
+          // backgroundColor: Colors.red,
+          child: ListView(
+            children: [
+              // 6-header section
+              DrawerHeader(
+                child: Text("Menu"),
+                decoration: BoxDecoration(
+                  color: Colors.lightBlue,
+                ),
+              ),
+
+              // 7-List Tile
+              ListTile(
+                title: Text("Account"),
+                subtitle: Text("click hrer to go to Account page"),
+                leading: Icon(Icons.contact_emergency),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  print("go to favorite pages");
+                },
+                onLongPress: () {
+                  print("try to delete");
+                },
+              ),
+              ListTile(
+                title: Text("Favorites"),
+                subtitle: Text("click hrer to go to favorite page"),
+                leading: Icon(Icons.favorite),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  print("go to favorite pages");
+                },
+                onLongPress: () {
+                  print("try to delete");
+                },
+              ),
+              ListTile(
+                title: Text("Settings"),
+                subtitle: Text("click hrer to go to Settings page"),
+                leading: Icon(Icons.settings),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  print("go to favorite pages");
+                },
+                onLongPress: () {
+                  print("try to delete");
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
