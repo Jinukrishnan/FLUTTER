@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class ScaffoldWidget extends StatelessWidget {
@@ -119,6 +120,54 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        // 6-Bottum NavigationBar
+        // bottomNavigationBar: BottomNavigationBar(
+        //   items: [
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.home),
+        //       label: "home",
+        //       tooltip: "click here",
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.add),
+        //       label: "Post",
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.search),
+        //       label: "search",
+        //     ),
+
+        //     // BottomNavigationBarItem(
+        //     //   icon: Icon(Icons.video_call),
+        //     //   label: "media",
+        //     // ),
+        //   ],
+        // ),
+        backgroundColor: Colors.deepPurple,
+
+        // first install curved_navigation_bar: ^1.0.6
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.deepPurple,
+          color: Colors.deepPurple.shade200,
+          animationDuration: Duration(milliseconds: 300),
+          onTap: (index) {
+            print(index);
+          },
+          items: [
+            Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.favorite,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+          ],
         ),
       ),
     );
