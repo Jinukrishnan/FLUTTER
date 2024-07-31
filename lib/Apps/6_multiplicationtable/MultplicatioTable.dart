@@ -15,11 +15,12 @@ class _MultiplicationTableState extends State<MultiplicationTable> {
     try {
       var data = int.parse(_textEditControlller.text);
       print(data);
-      for (var i = 1; i <= 10; i++) {
-        setState(() {
+      setState(() {
+        ls = [];
+        for (var i = 1; i <= 10; i++) {
           ls.add("${i} X ${data} = ${i * data}");
-        });
-      }
+        }
+      });
       print(ls);
     } catch (error) {
       print(error);
@@ -73,16 +74,14 @@ class _MultiplicationTableState extends State<MultiplicationTable> {
               ),
               Divider(),
               Expanded(
-                child: Center(
-                  child: ListView.builder(
-                      itemCount: ls.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          titleAlignment: ListTileTitleAlignment.center,
-                          title: Text(ls[index]),
-                        );
-                      }),
-                ),
+                child: ListView.builder(
+                    itemCount: ls.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        titleAlignment: ListTileTitleAlignment.center,
+                        title: Center(child: Text(ls[index])),
+                      );
+                    }),
               )
             ],
           ),
