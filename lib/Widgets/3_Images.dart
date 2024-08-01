@@ -13,8 +13,8 @@ class Images extends StatelessWidget {
           // display image from assets
           child: Image.asset(
             'images/img1.jpg',
-            width: 50,
-            height: 50,
+            width: 100,
+            height: 100,
             // fit: BoxFit.contain,
             // color: Colors.blue,
             // colorBlendMode: BlendMode.difference,
