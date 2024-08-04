@@ -1,3 +1,4 @@
+import 'package:apps/Apps/10_SharedPrefferance/SharedPreffernceTODO.dart';
 import 'package:apps/Apps/1_NEUMOPHISM.dart';
 import 'package:apps/Apps/2_DARK_NEUMORPHISM.dart';
 import 'package:apps/Apps/3_BUTTONSWITHNEUMORPHISM.dart';
@@ -14,6 +15,7 @@ void main() {
   // runApp(Calculator());
   // runApp(MultiplicationTable());
   // runApp(ArrayTodo());
-  // runApp(CustomUI());
-  runApp(SendMSGmakeCALL());
+  runApp(CustomUI());
+  // runApp(SendMSGmakeCALL());
+  // runApp(SharedPreffernceTODO());
 }
