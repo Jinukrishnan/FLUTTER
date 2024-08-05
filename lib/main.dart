@@ -15,7 +15,7 @@ void main() {
   // runApp(Calculator());
   // runApp(MultiplicationTable());
   // runApp(ArrayTodo());
-  runApp(CustomUI());
+  // runApp(CustomUI());
   // runApp(SendMSGmakeCALL());
-  // runApp(SharedPreffernceTODO());
+  runApp(SharedPreffernceTODO());
 }
