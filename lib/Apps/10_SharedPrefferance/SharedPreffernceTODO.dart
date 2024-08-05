@@ -53,7 +53,7 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
     } else {
       var alert = AlertDialog(
         title: Text("Alert"),
-        content: Text("Please fill the inout field"),
+        content: Text("Please fill the input field"),
         actions: <Widget>[
           TextButton(
               onPressed: () {
@@ -82,98 +82,96 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
   Widget build(BuildContext context) {
     // @override
 
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          padding: EdgeInsets.all(30),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        labelText: "Add Task ",
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.all(30),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      labelText: "Add Task ",
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
 
-                          // gapPadding: ,
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
+                        // gapPadding: ,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey,
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 20),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        shadowColor: Colors.grey,
-                        elevation: 5,
-                        padding: EdgeInsets.all(20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      onPressed: () {
-                        addTask(context);
-                      },
-                      child: Text(
-                        "Add",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Text(
-                  "Tasks",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shadowColor: Colors.grey,
+                      elevation: 5,
+                      padding: EdgeInsets.all(20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    onPressed: () {
+                      addTask(context);
+                    },
+                    child: Text(
+                      "Add",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Text(
+                "Tasks",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: tasks.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(tasks[index].toString()),
-                        trailing: IconButton(
-                          onPressed: () {
-                            deleteTak(index);
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            color: Colors.red[800],
-                          ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: tasks.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(tasks[index].toString()),
+                      trailing: IconButton(
+                        onPressed: () {
+                          deleteTak(index);
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.red[800],
                         ),
-                      );
-                    }),
-              )
-            ],
-          ),
+                      ),
+                    );
+                  }),
+            )
+          ],
         ),
       ),
     );

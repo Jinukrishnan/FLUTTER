@@ -17,5 +17,5 @@ void main() {
   // runApp(ArrayTodo());
   // runApp(CustomUI());
   // runApp(SendMSGmakeCALL());
-  runApp(SharedPreffernceTODO());
+  runApp(MaterialApp(home: SharedPreffernceTODO()));
 }
