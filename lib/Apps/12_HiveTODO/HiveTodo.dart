@@ -1,6 +1,8 @@
 import 'package:apps/Apps/12_HiveTODO/pages/DialogueBox.dart';
 import 'package:apps/Apps/12_HiveTODO/pages/ToDoList.dart';
+import 'package:apps/Apps/12_HiveTODO/pages/TodoDatabase.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class HiveTodo extends StatefulWidget {
   const HiveTodo({super.key});
@@ -10,22 +12,40 @@ class HiveTodo extends StatefulWidget {
 }
 
 class _HiveTodoState extends State<HiveTodo> {
+  TodoDatabase db = TodoDatabase();
   TextEditingController _controller = TextEditingController();
-  final List<List<dynamic>> todos = [
-    ["Drink", true],
-    ["Sleep", false],
-    ["Walk", true],
-    ["Work", false],
-  ];
+  // final List<List<dynamic>> todos = [
+  //   ["Drink", true],
+  //   ["Sleep", false],
+  //   ["Walk", true],
+  //   ["Work", false],
+  // ];
+  final _myBox = Hive.box("myBox");
+  @override
+  void initState() {
+    // TODO: implement initState
+    // if (_myBox.get("Todos") == null) {
+    //   db.createInitialData();
+    // } else {
+    //   db.loadData();
+    // }
+    if (_myBox.get("Todos") != null) {
+      db.loadData();
+    }
+    super.initState();
+  }
+
   void checkBoxChanged(bool? value, int index) {
     setState(() {
-      todos[index][1] = !todos[index][1];
+      db.todos[index][1] = !db.todos[index][1];
     });
+    db.updateDatabase();
   }
 
   void onSave() {
     setState(() {
-      todos.add([_controller.text, false]);
+      db.todos.add([_controller.text, false]);
+      db.updateDatabase();
     });
     _controller.clear();
     Navigator.of(context).pop();
@@ -37,7 +57,8 @@ class _HiveTodoState extends State<HiveTodo> {
 
   void onDelete(int index) {
     setState(() {
-      todos.removeAt(index);
+      db.todos.removeAt(index);
+      db.updateDatabase();
     });
   }
 
@@ -67,12 +88,12 @@ class _HiveTodoState extends State<HiveTodo> {
         elevation: 0,
       ),
       body: ListView.builder(
-          itemCount: todos.length,
+          itemCount: db.todos.length,
           itemBuilder: (context, index) {
             return ToDoList(
                 onDelete: (context) => onDelete(index),
-                taskName: todos[index][0],
-                taskCompleted: todos[index][1],
+                taskName: db.todos[index][0],
+                taskCompleted: db.todos[index][1],
                 onChange: (value) => checkBoxChanged(value, index));
           }),
       floatingActionButton: FloatingActionButton(
