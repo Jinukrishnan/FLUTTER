@@ -158,6 +158,12 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      onLongPress: () {
+                        print("object");
+                        setState(() {
+                          _controller.text = tasks[index];
+                        });
+                      },
                       title: Text(tasks[index].toString()),
                       trailing: IconButton(
                         onPressed: () {
