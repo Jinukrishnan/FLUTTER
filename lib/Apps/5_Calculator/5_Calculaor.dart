@@ -42,6 +42,7 @@ class _CalculatorState extends State<Calculator> {
         body: Column(
           children: [
             Expanded(
+              // input section
               child: Container(
                 // color: Colors.grey,
                 child: Padding(
@@ -68,6 +69,7 @@ class _CalculatorState extends State<Calculator> {
                 ),
               ),
             ),
+            // button section
             Expanded(
               flex: 2,
               child: GridView.builder(

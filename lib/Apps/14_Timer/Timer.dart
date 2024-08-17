@@ -1,181 +1,145 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class StopwatchX extends StatefulWidget {
-  const StopwatchX({super.key, required this.prefs});
-  final SharedPreferences prefs;
+  const StopwatchX({super.key});
 
   @override
-  State<StopwatchX> createState() => _StopwatchStateX();
+  State<StopwatchX> createState() => _StopwatchXState();
 }
 
-class _StopwatchStateX extends State<StopwatchX> {
-  DateTime? start;
-  Duration? time;
-  List<Duration> lapse = [];
-  Duration? getTime() {
-    final timeElapsed = DateTime.now().difference(start!);
-    return timeElapsed;
-  }
+class _StopwatchXState extends State<StopwatchX> {
+  Timer? _timer;
+  int _elapsTime = 0; //time in millisecond
+  bool _isRunning = false;
+  List<String> _laps = [];
 
-  void call() {
-    Future.delayed(Duration(milliseconds: 10), () {
-      if (start == null) return;
-      setState(() {
-        time = getTime();
+  void _startStopTimer() {
+    if (_isRunning) {
+      _timer?.cancel();
+    } else {
+      _timer = Timer.periodic(Duration(milliseconds: 100), (timer) {
+        setState(() {
+          _elapsTime += 100;
+        });
+
+        print(_elapsTime);
       });
-      call();
+    }
+    setState(() {
+      _isRunning = !_isRunning;
     });
   }
 
-  String getMilli(Duration duration) {
-    int ms = (duration.inMilliseconds - duration.inSeconds * 1000) ~/ 10;
-    return ms.toString();
+  void _resetTimer() {
+    setState(() {
+      _isRunning = false;
+      _elapsTime = 0;
+      _laps.clear();
+    });
+  }
+
+  void _recordLaps() {
+    setState(() {
+      _laps.add(_formatTime(_elapsTime));
+    });
+    print("========================================================$_laps");
+  }
+
+  String _formatTime(int milliSecond) {
+    int hundreds = (milliSecond / 10).truncate();
+    int seconds = (hundreds / 100).truncate();
+    int minutes = (seconds / 60).truncate();
+
+    String minutesStr = (minutes % 60).toString().padLeft(2, '0');
+    String secondsStr = (seconds % 60).toString().padLeft(2, '0');
+    String hundredsStr = (hundreds % 100).toString().padLeft(2, '0');
+    return "$minutesStr:$secondsStr.$hundredsStr";
   }
 
   @override
   Widget build(BuildContext context) {
-    final data = widget.prefs.getString("start");
-    final lapseData = widget.prefs.getStringList("lapse");
-    if (data != null) {
-      DateTime startTime = DateTime.parse(data);
-      start = startTime;
-      call();
-    }
-    if (lapseData != null) {
-      lapse = lapseData.map((e) {
-        final a = e.split(":");
-        return Duration(
-          hours: int.parse(a[0]),
-          minutes: int.parse(a[1]),
-          seconds: int.parse(a[2].split(".")[0]),
-          microseconds: int.parse(a[2].split(".")[1]),
-        );
-      }).toList();
-    }
-    return SizedBox(
-      height: double.infinity,
-      width: double.infinity,
-      child: Stack(
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Column(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 300,
-                width: 300,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(150),
-                    border: Border.all(color: Color(0xffffffff), width: 6)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(
-                      (time?.inSeconds.toString() ?? "00"),
-                      style: const TextStyle(
-                        fontSize: 90,
-                        color: Color(0xff87acf2),
-                      ),
-                    ),
-                    Text(
-                      time != null ? getMilli(time ?? Duration.zero) : "00",
-                      style: const TextStyle(
-                        fontSize: 45,
-                        color: Color(0xff87acf2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: double.infinity),
-              SizedBox(
-                height: 300,
-                width: 300,
-                child: ListView(
-                  children: [
-                    ...lapse.reversed.map((e) => ListTile(
-                          leading: const Icon(Icons.more_time_outlined),
-                          title: Text(
-                            "${e.inSeconds}:${getMilli(e)}",
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ))
-                  ],
-                ),
-              )
-            ],
+          SizedBox(
+            height: 50,
           ),
           Container(
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.all(35),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      start = null;
-                      time = null;
-                      lapse.clear();
-                    });
-                    widget.prefs.remove("lapse");
-                    widget.prefs.remove("start");
-                  },
-                  child: const Text(
-                    "Reset",
-                    style: TextStyle(color: Color(0xffffffff), fontSize: 17),
+                Text(
+                  _formatTime(_elapsTime),
+                  style: TextStyle(color: Colors.white, fontSize: 50),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: _recordLaps,
+                  child: Container(
+                    child: Center(
+                      child: Text("Laps"),
+                    ),
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        color: Colors.yellow,
+                        borderRadius: BorderRadius.circular(100)),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (start == null) {
-                      setState(() {
-                        start = DateTime.now();
-                      });
-                      widget.prefs.setString("start", start.toString());
-                      call();
-                    } else {
-                      setState(() {
-                        start = null;
-                      });
-                      widget.prefs.remove("start");
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                      elevation: 30,
-                      padding: const EdgeInsets.all(30),
-                      shape: const CircleBorder(),
-                      backgroundColor: const Color(0xff8ab4f8)),
-                  child: Icon(
-                    start == null
-                        ? Icons.play_arrow_outlined
-                        : Icons.pause_outlined,
-                    size: 30,
-                    color: const Color(0xff212120),
+                GestureDetector(
+                  onTap: _resetTimer,
+                  child: Container(
+                    child: Center(
+                      child: Text("Reset"),
+                    ),
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(100)),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    if (start != null) {
-                      final lap = DateTime.now().difference(start!);
-                      lapse.add(lap);
-                      List<String> parsed =
-                          lapse.map((e) => e.toString()).toList();
-                      widget.prefs.setStringList("lapse", parsed);
-                    }
-                  },
-                  child: const Text(
-                    "Lapse",
-                    style: TextStyle(color: Color(0xffffffff), fontSize: 17),
+                GestureDetector(
+                  onTap: _startStopTimer,
+                  child: Container(
+                    child: Center(
+                      child: _isRunning ? Text("Stop") : Text("Start"),
+                    ),
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        color: _isRunning ? Colors.red : Colors.green,
+                        borderRadius: BorderRadius.circular(100)),
                   ),
                 ),
               ],
             ),
-          )
+          ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: _laps.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Center(
+                        child: Text(
+                      _laps[index].toString(),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )),
+                  );
+                }),
+          ),
         ],
       ),
     );

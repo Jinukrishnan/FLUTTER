@@ -121,11 +121,15 @@
 // }
 // -----------------------------------------------------------------
 
+import 'package:apps/Apps/14_Timer/Timer.dart';
 import 'package:apps/Apps/15_COMPASS_APP/Compass.dart';
+import 'package:apps/Apps/16_Clock/Clock.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   return runApp(MaterialApp(
-    home: Compass(),
+    // home: Compass(),
+    // home: Clock(),
+    home: StopwatchX(),
   ));
 }
