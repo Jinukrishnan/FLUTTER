@@ -1,6 +1,6 @@
-import 'package:apps/Apps/12_HiveTODO/pages/DialogueBox.dart';
-import 'package:apps/Apps/12_HiveTODO/pages/ToDoList.dart';
-import 'package:apps/Apps/12_HiveTODO/pages/TodoDatabase.dart';
+import 'package:apps/Apps/17_HiveTODO/pages/DialogueBox.dart';
+import 'package:apps/Apps/17_HiveTODO/pages/ToDoList.dart';
+import 'package:apps/Apps/17_HiveTODO/pages/TodoDatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 

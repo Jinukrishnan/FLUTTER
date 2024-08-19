@@ -121,15 +121,35 @@
 // }
 // -----------------------------------------------------------------
 
-import 'package:apps/Apps/14_Timer/Timer.dart';
-import 'package:apps/Apps/15_COMPASS_APP/Compass.dart';
-import 'package:apps/Apps/16_Clock/Clock.dart';
+// import 'package:apps/Apps/14_Timer/Timer.dart';
+// import 'package:apps/Apps/15_COMPASS_APP/Compass.dart';
+// import 'package:apps/Apps/16_Clock/Clock.dart';
+import 'package:apps/Apps/12_Routing/NammedRouting/FirstPage.dart';
+import 'package:apps/Apps/12_Routing/NammedRouting/SecondPage.dart';
+import 'package:apps/Apps/12_Routing/NammedRouting/ThidPage.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  return runApp(MaterialApp(
-    // home: Compass(),
-    // home: Clock(),
-    home: StopwatchX(),
-  ));
+  return runApp(Apps());
+}
+
+class Apps extends StatefulWidget {
+  const Apps({super.key});
+
+  @override
+  State<Apps> createState() => _AppsState();
+}
+
+class _AppsState extends State<Apps> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: {
+        "/first": (BuildContext ctx) => FirstPage(),
+        "/second": (BuildContext ctx) => SecondPage(),
+        "/third": (BuildContext ctx) => ThirdPage(),
+      },
+      initialRoute: '/first',
+    );
+  }
 }
