@@ -26,7 +26,8 @@ class _FirstPageState extends State<FirstPage> {
             ElevatedButton(
                 onPressed: () {
                   // move to second page
-                  Navigator.pushNamed(context, '/second');
+                  // Navigator.pushNamed(context, '/second');
+                  Navigator.pushReplacementNamed(context, "/second");
                 },
                 child: Text("Second Page")),
             // ElevatedButton(onPressed: () {}, child: Text("back")),
