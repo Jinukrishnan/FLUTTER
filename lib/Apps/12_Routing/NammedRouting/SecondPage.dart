@@ -11,6 +11,7 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
+    final String message = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -22,7 +23,7 @@ class _SecondPageState extends State<SecondPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Second page"),
+            Text(message),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/third');

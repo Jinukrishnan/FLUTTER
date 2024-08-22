@@ -41,7 +41,6 @@
 //   //   theme: ThemeData(primarySwatch: Colors.yellow),
 //   // ));
 //   // ==================================================
-//   // runApp(MaterialApp(home: Carausel()));
 
 // }
 
@@ -127,10 +126,14 @@
 import 'package:apps/Apps/12_Routing/NammedRouting/FirstPage.dart';
 import 'package:apps/Apps/12_Routing/NammedRouting/SecondPage.dart';
 import 'package:apps/Apps/12_Routing/NammedRouting/ThidPage.dart';
+import 'package:apps/Apps/13_Carusel/Carausel.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  return runApp(Apps());
+  // return runApp(MaterialApp(home: Carausel()));
+  return runApp(MaterialApp(
+    home: Apps(),
+  ));
 }
 
 class Apps extends StatefulWidget {
