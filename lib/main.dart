@@ -127,6 +127,7 @@ import 'package:apps/Apps/12_Routing/NammedRouting/FirstPage.dart';
 import 'package:apps/Apps/12_Routing/NammedRouting/SecondPage.dart';
 import 'package:apps/Apps/12_Routing/NammedRouting/ThidPage.dart';
 import 'package:apps/Apps/13_Carusel/Carausel.dart';
+import 'package:apps/Apps/14_SharedPrefferance/SharedPreffernceTODO.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -147,12 +148,13 @@ class _AppsState extends State<Apps> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        "/first": (BuildContext ctx) => FirstPage(),
-        "/second": (BuildContext ctx) => SecondPage(),
-        "/third": (BuildContext ctx) => ThirdPage(),
-      },
-      initialRoute: '/first',
+      home:SharedPreffernceTODO()
+      // routes: {
+      //   "/first": (BuildContext ctx) => FirstPage(),
+      //   "/second": (BuildContext ctx) => SecondPage(),
+      //   "/third": (BuildContext ctx) => ThirdPage(),
+      // },
+      // initialRoute: '/first',
     );
   }
 }

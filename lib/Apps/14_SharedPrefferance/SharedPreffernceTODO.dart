@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +14,8 @@ class SharedPreffernceTODO extends StatefulWidget {
 class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
   TextEditingController _controller = TextEditingController();
   List<dynamic> tasks = [];
+  bool long = false;
+  int editIndex = -1;
 
   @override
   void initState() {
@@ -48,6 +51,51 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
       }
       setState(() {
         _controller.text = "";
+      });
+      getTasks();
+    } else {
+      var alert = AlertDialog(
+        title: Text("Alert"),
+        content: Text("Please fill the input field"),
+        actions: <Widget>[
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("OK"))
+        ],
+      );
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          });
+    }
+  }
+
+  void editTask(BuildContext context) async {
+    print(editIndex);
+    print(_controller.text);
+    final prefs = await SharedPreferences.getInstance();
+    final res = await prefs.getString('tasks');
+
+    if (_controller.text != "") {
+      if (res != null) {
+        List<dynamic> _tasks = json.decode(res);
+        // print(_tasks[0]);
+        print(editIndex.runtimeType);
+        // _tasks.add(_controller.text);
+        _tasks[editIndex] = _controller.text;
+        await prefs.setString('tasks', json.encode(_tasks));
+        print("success1");
+      } else {
+        List<dynamic> _tasks = [_controller.text];
+        await prefs.setString('tasks', json.encode(_tasks));
+        print("success2");
+      }
+      setState(() {
+        _controller.text = "";
+        long = false;
       });
       getTasks();
     } else {
@@ -128,12 +176,17 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
                       ),
                     ),
                     onPressed: () {
-                      addTask(context);
+                      long ? editTask(context) : addTask(context);
                     },
-                    child: Text(
-                      "Add",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    child: long
+                        ? Text(
+                            "Edit",
+                            style: TextStyle(color: Colors.white),
+                          )
+                        : Text(
+                            "Add",
+                            style: TextStyle(color: Colors.white),
+                          ),
                   ),
                 ),
               ],
@@ -160,8 +213,11 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
                     return ListTile(
                       onLongPress: () {
                         print("object");
+                        print(editIndex);
                         setState(() {
                           _controller.text = tasks[index];
+                          editIndex = index;
+                          long = true;
                         });
                       },
                       title: Text(tasks[index].toString()),
