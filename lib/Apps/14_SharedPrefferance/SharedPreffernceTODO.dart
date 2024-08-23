@@ -23,6 +23,9 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
     getTasks();
   }
 
+
+
+  // get data from sharedprefference
   void getTasks() async {
     final prefs = await SharedPreferences.getInstance();
     print("init state");
@@ -32,7 +35,8 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
       print(tasks);
     });
   }
-
+  // -------------------------------------------------------------------
+// add task
   void addTask(BuildContext context) async {
     print(_controller.text);
     final prefs = await SharedPreferences.getInstance();
@@ -72,7 +76,8 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
           });
     }
   }
-
+// -----------------------------------------------------
+  // edittask
   void editTask(BuildContext context) async {
     print(editIndex);
     print(_controller.text);
@@ -117,7 +122,8 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
           });
     }
   }
-
+// -----------------------------------------------------
+  // deletetask
   void deleteTak(index) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -126,7 +132,7 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
     await prefs.setString('tasks', json.encode(tasks));
     getTasks();
   }
-
+// ----------------------------------------------------------
   Widget build(BuildContext context) {
     // @override
 
@@ -141,6 +147,7 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
             SizedBox(
               height: 30,
             ),
+            // addtask
             Row(
               children: [
                 Expanded(
@@ -191,6 +198,8 @@ class _SharedPreffernceTODOState extends State<SharedPreffernceTODO> {
                 ),
               ],
             ),
+            // ------------------------------------------------
+            // display
             SizedBox(
               height: 20,
             ),
