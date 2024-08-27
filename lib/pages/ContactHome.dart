@@ -12,7 +12,7 @@ class ContactHome extends StatefulWidget {
 }
 
 class _ContactHomeState extends State<ContactHome> {
-  List<dynamic> _contacts=[];
+  List<dynamic> _contacts = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -21,36 +21,39 @@ class _ContactHomeState extends State<ContactHome> {
   }
 
   void _loadImage() async {
-
-    // final prefs = await SharedPreferences.getInstance();
-    // final res = await prefs.getString('contacts');
+    final prefs = await SharedPreferences.getInstance();
+    final res = await prefs.getString('contacts');
     // print(res);
 
-    // setState(() {
-    //   _contacts = json.decode(res!);
-    //   print(_contacts);
-    // });
+    setState(() {
+      _contacts = json.decode(res!);
+      print(_contacts);
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Contacts"),
       ),
-
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-
         child: ListView.builder(
-            itemCount: 20,
-            itemBuilder: (context,index){
-          return ListTile(
-            contentPadding: EdgeInsets.all(20),
-            title: Text("data"),
-            trailing: Icon(Icons.more_vert),
-          );
-        }),
+            itemCount: _contacts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, '/display', arguments: index);
+                },
+                contentPadding: EdgeInsets.all(20),
+                title: Text(
+                    "${_contacts[index]["fname"]} ${_contacts[index]["lname"]}"),
+                subtitle: Text(_contacts[index]["phone"]),
+                trailing: Icon(Icons.more_vert),
+              );
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

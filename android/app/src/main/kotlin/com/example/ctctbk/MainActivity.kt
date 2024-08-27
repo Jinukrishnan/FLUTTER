@@ -1,4 +1,4 @@
-package com.example.contactbook
+package com.example.ctctbk
 
 import io.flutter.embedding.android.FlutterActivity
 

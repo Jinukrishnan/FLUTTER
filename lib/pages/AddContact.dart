@@ -18,44 +18,48 @@ class _AddContactState extends State<AddContact> {
   TextEditingController _phone = TextEditingController();
   File? _image;
   final ImagePicker _picker = ImagePicker();
-
-
-  void _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (_picker != null) {
-      setState(() {
-        _image = File(pickedFile!.path);
-      });
-    }
+  void pickImage() async {
+    final pickedfile = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = File(pickedfile!.path);
+    });
   }
 
-
-
-  Future<void> _saveData() async{
-
+  Future<void> saveData() async {
     final prefs = await SharedPreferences.getInstance();
-    final res=prefs.getString("contacts");
+    final res = prefs.getString("contacts");
     final bytes = await _image!.readAsBytes();
     final base64Image = base64Encode(bytes);
-
-    if(res!=null){
-      List<dynamic> contacts= json.decode(res);
-      contacts.add({"fname":_fname.text,"lname":_lname.text,"email":_email.text,"phone":_phone.text,"profile":base64Image});
+    // print("======================================================");
+    // print(res!.length);
+    // print("object");
+    if (res != null) {
+      List<dynamic> contacts = json.decode(res);
+      contacts.add({
+        "fname": _fname.text,
+        "lname": _lname.text,
+        "email": _email.text,
+        "phone": _phone.text,
+        "profile": base64Image
+      });
       prefs.setString("contacts", jsonEncode(contacts));
-      print("added");
-      Navigator.pushNamed(context, '/home');
-      final asd=prefs.getString("contacts");
-      print(asd);
-
-    }
-    else{
-      List<dynamic> contacts=[{"fname":_fname.text,"lname":_lname.text,"email":_email.text,"phone":_phone.text,"profile":base64Image}];
+      // print("added");
+      Navigator.pushNamed(context, '/');
+      // final asd = prefs.getString("contacts");
+      // print(asd);
+    } else {
+      List<dynamic> contacts = [
+        {
+          "fname": _fname.text,
+          "lname": _lname.text,
+          "email": _email.text,
+          "phone": _phone.text,
+          "profile": base64Image
+        }
+      ];
       prefs.setString("contacts", jsonEncode(contacts));
-      Navigator.pushNamed(context, '/home');
-
+      Navigator.pushNamed(context, '/');
     }
-
-    // await prefs.setString("userImage", base64Image);
   }
 
   @override
@@ -94,7 +98,7 @@ class _AddContactState extends State<AddContact> {
               ),
             ),
             TextButton(
-              onPressed: _pickImage,
+              onPressed: pickImage,
               child: Text("Pick Image"),
             ),
             Divider(),
@@ -146,7 +150,7 @@ class _AddContactState extends State<AddContact> {
               height: 30,
             ),
             ElevatedButton(
-              onPressed: _saveData,
+              onPressed: saveData,
               child: Text(
                 "Add",
                 style: TextStyle(fontSize: 18, color: Colors.white),
