@@ -45,7 +45,7 @@ class _ContactHomeState extends State<ContactHome> {
             itemBuilder: (context, index) {
               return ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, '/display', arguments: index);
+                  Navigator.pushNamed(context, '/display', arguments: index.toString());
                 },
                 contentPadding: EdgeInsets.all(20),
                 title: Text(
