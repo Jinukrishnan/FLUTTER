@@ -1,5 +1,7 @@
 import 'package:animation/animation/10_AnimatedList.dart';
 import 'package:animation/animation/11_AnimatedGrid.dart';
+import 'package:animation/animation/12_sizeTransistion.dart';
+import 'package:animation/animation/16_SlideTransition.dart';
 import 'package:animation/animation/1_AnimatedContainer.dart';
 import 'package:animation/animation/2_AnimatedAlign.dart';
 import 'package:animation/animation/3_AnimatedPadding.dart';
@@ -24,6 +26,8 @@ void main() {
     // home: AnimatedScaleWidget(),
     // home: AnimatedIconWidget(),
     // home: AnimatedListWidget(),
-    home: AnimatedGridExample(),
+    // home: AnimatedGridExample(),
+    // home: SizeTransitionExample(),
+    home: SlideTransitionExample(),
   ));
 }
