@@ -22,7 +22,7 @@ class _SlideTransitionExampleState extends State<SlideTransitionExample>
       begin: const Offset(0.0, -1.0),
       end: Offset.zero,
     ).animate(_controller);
-    _controller.forward();
+    // _controller.forward();
   }
 
   @override
