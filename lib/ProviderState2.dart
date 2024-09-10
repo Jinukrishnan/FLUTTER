@@ -19,13 +19,11 @@ class _ProviderState2State extends State<ProviderState2> {
                 title: Center(
                   child: Text("SetState"),
                 ),
-                actions: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.forward))
-                ],
+               
               ),
               body: Column(
                 children: [
-                  Text("TOtoal Count is ${NumberListModal.numbers!.length}"),
+                  Text("Totoal Count is ${NumberListModal.numbers!.length}"),
                   Expanded(
                     child: ListView.builder(
                         itemCount: NumberListModal.numbers!.length,

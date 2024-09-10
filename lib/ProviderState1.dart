@@ -32,14 +32,14 @@ class _ProviderState1State extends State<ProviderState1> {
               ),
               body: Column(
                 children: [
-                  Text("TOtoal Count is ${NumberListModal.numbers!.length}"),
+                  Text("Totoal Count is ${NumberListModal.numbers.length}"),
                   Expanded(
                     child: ListView.builder(
-                        itemCount: NumberListModal.numbers!.length,
+                        itemCount: NumberListModal.numbers.length,
                         itemBuilder: (context, index) {
                           return ListTile(
-                            title: Text(
-                                NumberListModal.numbers![index].toString()),
+                            title:
+                                Text(NumberListModal.numbers[index].toString()),
                           );
                         }),
                   ),

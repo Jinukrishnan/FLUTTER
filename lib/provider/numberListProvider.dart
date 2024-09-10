@@ -5,5 +5,6 @@ class NumberListProvider extends ChangeNotifier {
 
   void addNumbers() {
     numbers.add(numbers.last + 1);
+    notifyListeners();
   }
 }
