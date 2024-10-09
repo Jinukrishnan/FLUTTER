@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "906123916363",
+    "project_id": "userauth-a21d3",
+    "storage_bucket": "userauth-a21d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906123916363:android:12eaaeeffce747557249ce",
+        "android_client_info": {
+          "package_name": "com.example.userauthentication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2168MUhnKOIsOVUbe5kKJ3-YT46z40jU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906123916363:android:cfadbd241ac637887249ce",
+        "android_client_info": {
+          "package_name": "com.synnefo.userauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2168MUhnKOIsOVUbe5kKJ3-YT46z40jU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

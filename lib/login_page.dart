@@ -1,0 +1,148 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController email = TextEditingController();
+  TextEditingController pwd = TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email.text.trim(),
+      password: pwd.text.trim(),
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    email.dispose();
+    pwd.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.android,
+                size: 100,
+              ),
+              // "Hello Again"
+              SizedBox(height: 35),
+              Text(
+                "Hello Again !",
+                style: GoogleFonts.bebasNeue(fontSize: 35),
+              ),
+              SizedBox(height: 30),
+              Text(
+                "Welcome back , You\'ve been missed !",
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+              SizedBox(height: 10),
+
+              // email textfield
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: TextField(
+                      controller: email,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Email",
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              // password textfield
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: TextField(
+                      obscureText: true,
+                      controller: pwd,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Password",
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+
+              // sign in button
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: GestureDetector(
+                  onTap: signIn,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // not a member ? register now
+              SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Not a Member? "),
+                  Text(
+                    " Register Now",
+                    style: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
