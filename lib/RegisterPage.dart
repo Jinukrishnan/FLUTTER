@@ -1,33 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  final VoidCallback showRegisterPage;
-  const LoginPage({super.key, required this.showRegisterPage});
+class RegisterPage extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  const RegisterPage({super.key, required this.showLoginPage});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   TextEditingController email = TextEditingController();
   TextEditingController pwd = TextEditingController();
+  TextEditingController cpwd = TextEditingController();
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email.text.trim(),
-      password: pwd.text.trim(),
-    );
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    email.dispose();
-    pwd.dispose();
-    super.dispose();
+  Future signUp() async {
+    if (pwd.text == cpwd.text) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email.text.trim(),
+        password: pwd.text.trim(),
+      );
+    } else {
+      print(" password not matched");
+    }
   }
 
   @override
@@ -46,12 +42,12 @@ class _LoginPageState extends State<LoginPage> {
               // "Hello Again"
               SizedBox(height: 35),
               Text(
-                "Hello Again !",
+                "Hello There",
                 style: GoogleFonts.bebasNeue(fontSize: 35),
               ),
               SizedBox(height: 30),
               Text(
-                "Welcome back , You\'ve been missed !",
+                "Register below with your details !",
                 style: TextStyle(
                   fontSize: 18,
                 ),
@@ -103,12 +99,34 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 10),
-
+              // confirm password textfield
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: TextField(
+                      obscureText: true,
+                      controller: cpwd,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Confirm Password",
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
               // sign in button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: GestureDetector(
-                  onTap: signIn,
+                  onTap: signUp,
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -132,11 +150,11 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Not a Member? "),
+                  Text("I have account  "),
                   GestureDetector(
-                    onTap: widget.showRegisterPage,
+                    onTap: widget.showLoginPage,
                     child: Text(
-                      " Register Now",
+                      " LogIn Now",
                       style: TextStyle(
                           color: Colors.blue, fontWeight: FontWeight.bold),
                     ),
