@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:userauthentication/ForgetPassword.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -122,6 +123,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               SizedBox(height: 10),
+             
+
               // sign in button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -146,6 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               // not a member ? register now
+
               SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
