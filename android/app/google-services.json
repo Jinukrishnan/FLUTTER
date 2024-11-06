@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "906123916363",
     "project_id": "userauth-a21d3",
-    "storage_bucket": "userauth-a21d3.appspot.com"
+    "storage_bucket": "userauth-a21d3.firebasestorage.app"
   },
   "client": [
     {
@@ -12,7 +12,12 @@
           "package_name": "com.example.userauthentication"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "906123916363-6fe4vp9oedrp434sh3ascr1asa98gvat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA2168MUhnKOIsOVUbe5kKJ3-YT46z40jU"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906123916363-6fe4vp9oedrp434sh3ascr1asa98gvat.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "906123916363-e321css5b07d4ktuv5ifjt774ul43lm8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.userauthentication"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +48,20 @@
           "package_name": "com.synnefo.userauth"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "906123916363-00l6fdopigmutjshutlqugupqid3mg84.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.synnefo.userauth",
+            "certificate_hash": "c9a85bb628b3cc9f628adb1867a431a94d2be905"
+          }
+        },
+        {
+          "client_id": "906123916363-6fe4vp9oedrp434sh3ascr1asa98gvat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA2168MUhnKOIsOVUbe5kKJ3-YT46z40jU"
@@ -39,7 +69,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906123916363-6fe4vp9oedrp434sh3ascr1asa98gvat.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "906123916363-e321css5b07d4ktuv5ifjt774ul43lm8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.userauthentication"
+              }
+            }
+          ]
         }
       }
     }

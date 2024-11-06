@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:userauthentication/ForgetPassword.dart';
-
+import 'package:google_sign_in/google_sign_in.dart';
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
   const LoginPage({super.key, required this.showRegisterPage});
@@ -15,12 +15,27 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController pwd = TextEditingController();
-
   Future signIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email.text.trim(),
       password: pwd.text.trim(),
     );
+  }
+
+  Future signInWithGoogle() async {
+    try {
+      final firebaseAuth = await FirebaseAuth.instance;
+      final googleSevices = await GoogleSignIn();
+      final googleUser = await googleSevices.signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final cred = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken
+      );
+      final user = await firebaseAuth.signInWithCredential(cred);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -139,6 +154,30 @@ class _LoginPageState extends State<LoginPage> {
                     child: Center(
                       child: Text(
                         "Sign In",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              // sign in button-google
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: GestureDetector(
+                  onTap: signInWithGoogle,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Google Sign In",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
