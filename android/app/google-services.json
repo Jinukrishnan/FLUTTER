@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "353289210760",
+    "project_id": "chatapp-6fb24",
+    "storage_bucket": "chatapp-6fb24.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353289210760:android:f5a390a6610eada856c83d",
+        "android_client_info": {
+          "package_name": "com.example.chatbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353289210760-ek7ssbq67l1p5ksgir2nknpkgiem1nev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatbook",
+            "certificate_hash": "6005b1760a1a760c8801f6a35b7049445168b42e"
+          }
+        },
+        {
+          "client_id": "353289210760-jt54d652fg0v6qfv9cb5ectmfi1q3ias.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuRPj5GhNdgR_ECj9UUAA-V48ew7u5JsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353289210760-jt54d652fg0v6qfv9cb5ectmfi1q3ias.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
