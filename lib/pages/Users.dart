@@ -1,5 +1,8 @@
+import 'package:chatbook/UserProvider.dart';
+import 'package:chatbook/pages/ChatBox.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Users extends StatefulWidget {
   const Users({super.key});
@@ -57,7 +60,10 @@ class _UsersState extends State<Users> {
            
                   onTap: () {
                     // Handle item tap (e.g., navigate to a details page)
-                    print('Tapped on ${user['userId']}');
+                    print('Tapped on ${user['userid']}');
+                    Provider.of<UserProvider>(context, listen: false).setSid(user['userid'] ?? '');
+                    print(Provider.of<UserProvider>(context, listen: false).uid);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatBox()));
                   },
                 );
               },

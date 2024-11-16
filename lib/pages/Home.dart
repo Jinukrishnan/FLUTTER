@@ -12,25 +12,24 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Future<void> signOutGoogleUser() async {
-  final googleSignIn = GoogleSignIn();
+    final googleSignIn=GoogleSignIn();
 
-  try {
-    // Check if Google user is signed in
-    if (await googleSignIn.isSignedIn()) {
-      // Sign out from Google and Firebase
-      await googleSignIn.signOut();
-      await FirebaseAuth.instance.signOut();
+      try {
+if(await googleSignIn.isSignedIn()){
+  await  googleSignIn.signOut();
+  await FirebaseAuth.instance.signOut();
 
-      // Only attempt disconnect if still signed in
-      if (await googleSignIn.isSignedIn()) {
-        await googleSignIn.disconnect();
-      }
-    } else {
-      print('User is not signed in.');
-    }
-  } catch (e) {
-    print("Error during Google Sign Out: $e");
+  if(await googleSignIn.isSignedIn()){
+    await googleSignIn.disconnect();
   }
+}
+else{
+  print("usernot signed in");
+}
+        
+      } catch (e) {
+        print(e);
+      }
 }
   @override
   Widget build(BuildContext context) {
