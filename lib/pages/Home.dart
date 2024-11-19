@@ -15,9 +15,9 @@ class _HomeState extends State<Home> {
     final googleSignIn=GoogleSignIn();
 
       try {
+  await FirebaseAuth.instance.signOut();
 if(await googleSignIn.isSignedIn()){
   await  googleSignIn.signOut();
-  await FirebaseAuth.instance.signOut();
 
   if(await googleSignIn.isSignedIn()){
     await googleSignIn.disconnect();
