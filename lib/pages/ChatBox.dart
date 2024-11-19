@@ -213,8 +213,8 @@ class _ChatBoxState extends State<ChatBox> {
  Stream<QuerySnapshot> getMessages(String sender, String receiver) {
   return FirebaseFirestore.instance
       .collection("Messages")
-      .where("sender", isEqualTo: sender)
-      .where("receiver", isEqualTo: receiver)
+      .where("sender", whereIn: [sender, receiver])
+      .where("receiver", whereIn: [sender, receiver])
       .orderBy("timestamp", descending: false)
       .snapshots();
 }
@@ -245,20 +245,21 @@ class _ChatBoxState extends State<ChatBox> {
             child: StreamBuilder<QuerySnapshot>(
               stream: getMessages(sender, receiver),
               builder: (context, snapshot) {
+                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${snapshot.data}");
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 }
 
-                if (snapshot.hasError) {
-                  return Center(child: Text("Something went wrong!"));
-                }
+                // if (snapshot.hasError) {
+                //   return Center(child: Text("Something went wrong!"));
+                // }
 
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Center(child: Text("No messages yet"));
-                }
+                // if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                //   return Center(child: Text("No messages yet"));
+                // }
 
                 final messages = snapshot.data!.docs;
-
+                  
                 return ListView.builder(
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
